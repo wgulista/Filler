@@ -2,14 +2,9 @@
 
 void			init_env(t_env *e)
 {
-	/*t_player 	*p1;
-	t_player 	*p2;
-	t_point 	*map;*/
-
-	(void)e;
-}
-
-void			delete_env(t_env *e)
-{
-	(void)e;
+	e->num_player = 0;
+	e->map_x = 0;
+	e->map_y = 0;
+	e->solve_x = 0;
+	e->solve_y = 0;
 }

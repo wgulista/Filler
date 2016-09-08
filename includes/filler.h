@@ -2,32 +2,19 @@
 # define FILLER_H
 # include "../libft/includes/libft.h"
 
-typedef struct 		s_point
+typedef struct 	s_env
 {
-	int				x;
-	int 			y;
-}					t_point;
+	char		num_player;
+	int 		map_x;
+	int 		map_y;
+	int 		solve_x;
+	int 		solve_Y;
 
-typedef struct  	s_player
-{
-	int 			got;
-	t_point			*pos;
-}					t_player;
+}				t_env;
 
-typedef struct 		s_piece
-{
-	char 			*piece;
-	t_point			*size;
-}					t_piece;
+void			free_tab(char **tab);
+void			init_env(t_env *e);
 
-typedef struct 		s_env
-{
-	t_player 		*p1;
-	t_player 		*p2;
-	t_point 		*map;
-}					t_env;
-
-void				init_env(t_env *e);
-void				delete_env(t_env *e);
+//int			find_player(char *line, t_env *e);
 
 #endif
