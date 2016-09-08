@@ -2,8 +2,16 @@
 
 int			find_map(char *line, t_env *e)
 {
-	char	**tmp;
+	char	**map;
 
-	tmp = ft_strplit(line, ' ');
-	if (ft_strequ(line[]))
+	map = NULL;
+	if (ft_strstr(line, "Plateau") != NULL)
+	{
+		map = ft_strsplit(line, ' ');
+		e->map_xy.x = ft_atoi(map[1]);
+		e->map_xy.x = ft_atoi(map[2]);
+		free_tab(map);
+		return (1);
+	}
+	return (0);
 }
