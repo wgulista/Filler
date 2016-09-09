@@ -1,15 +1,33 @@
 #include "../includes/filler.h"
 
-void			init_env(t_env *e)
+
+void		free_env(t_env *e)
 {
-	e->num_player = 0;
-	e->map_xy.map = NULL;
-	e->map_xy.x = 0;
-	e->map_xy.y = 0;
-	e->piece_xy.map = NULL;
-	e->piece_xy.x = 0;
-	e->piece_xy.y = 0;
-	e->solve_xy.map = NULL;
-	e->solve_xy.x = 0;
-	e->solve_xy.y = 0;
+	free_tab(e->map.map);
+	free_tab(e->piece.map);
+	free(e);
+}
+
+t_env		*init_env()
+{
+	t_env 	*ret;
+
+	ret = (t_env *)malloc(sizeof(ret));
+	ret->num_player = 0;
+	ret->map.map = NULL;
+	ret->map.x = 0;
+	ret->map.y = 0;
+	ret->piece.map = NULL;
+	ret->piece.x = 0;
+	ret->piece.y = 0;
+	ret->player.map = NULL;
+	ret->player.x = 0;
+	ret->player.y = 0;
+	ret->opponent.map = NULL;
+	ret->opponent.x = 0;
+	ret->opponent.y = 0;
+	ret->solver.map = NULL;
+	ret->solver.x = 0;
+	ret->solver.y = 0;
+	return (ret);
 }

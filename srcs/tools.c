@@ -10,6 +10,16 @@ void		free_tab(char **tab)
 	free(tab);
 }
 
+int			length_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i] != 0)
+		i++;
+	return (i);
+}
+
 void		print_tab(char **tab)
 {
 	int 	i;

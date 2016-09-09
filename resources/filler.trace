@@ -1,2 +1,3 @@
-seed = 6825
-X: timedout
+seed = 0
+X: error on input
+../wgulista.filler: Segfault at 0

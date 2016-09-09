@@ -1,28 +1,50 @@
 #include "../includes/filler.h"
 
-int			find_player(char *line, t_env *e, char **av)
+void		get_num_player(t_env *e, char **parse)
 {
-	char	**player;
-
-	player = ft_strsplit(line, ' ');
-	if (!ft_strequ(player[0], "$$$") || ft_strequ(player[1], "exec") ||
-		!ft_strequ(player[4], av[0]))
-	{
-		free_tab(player);
-		return (0);
-	}
-	if (ft_strequ(player[2], "p1"))
-	{
+	if (ft_strequ(parse[2], "p1"))
 		e->num_player = 1;
-		free_tab(player);
-		return (1);
-	}
-	if (ft_strequ(player[2], "p2"))
-	{
+	else
 		e->num_player = 2;
-		free_tab(player);
-		return (1);
+	free_tab(parse);
+}
+
+void		search_player_pos(char c, t_env *e)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < e->map.y)
+	{
+		j = -1;
+		while (++j < e->map.x)
+		{
+			if (e->map.map[i][j] == c)
+			{
+				e->player.x = j;
+				e->player.y = i;
+			}
+		}
 	}
-	free_tab(player);
-	return (0);
+}
+
+void		search_opponent_pos(char c, t_env *e)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < e->map.y)
+	{
+		j = -1;
+		while (++j < e->map.x)
+		{
+			if (e->map.map[i][j] == c)
+			{
+				e->opponent.x = j;
+				e->opponent.y = i;
+			}
+		}
+	}
 }

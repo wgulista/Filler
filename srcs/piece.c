@@ -1,17 +1,22 @@
 #include "../includes/filler.h"
 
-int 		find_piece(char *line, t_env *e)
+void		get_piece(t_env *e, char **parse)
 {
-	char	**piece;
+	e->piece.x = ft_atoi(parse[2]);
+	e->piece.y = ft_atoi(parse[1]);
+	free_tab(parse);
+}
 
-	piece = NULL;
-	if (ft_strstr(line, "Piece") != NULL)
+void		get_piece_map(t_env *e, char *line)
+{
+	int		i;
+
+	i = -1;
+	e->piece.map = (char **)malloc(sizeof(char *) * (e->piece.y + 1));
+	while (++i < e->piece.y)
 	{
-		piece = ft_strsplit(line, ' ');
-		e->piece_xy.x = ft_atoi(piece[1]);
-		e->piece_xy.y = ft_atoi(piece[2]);
-		free_tab(piece);
-		return (1);
+		get_next_line(0, &line);
+		e->piece.map[i] = ft_strdup(line);
+		e->piece.map[i] = ft_strjoin(e->piece.map[i], "\n");
 	}
-	return (0);
 }
