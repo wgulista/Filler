@@ -1,11 +1,15 @@
 #include "../includes/filler.h"
 
-
 void		free_env(t_env *e)
 {
-	free_tab(e->map.map);
-	free_tab(e->piece.map);
-	free(e);
+	e->map.x = 0;
+	e->map.y = 0;
+	free(e->map.map);
+	e->piece.x = 0;
+	e->piece.y = 0;
+	free(e->piece.map);
+	e->solver.x = 0;
+	e->solver.y = 0;
 }
 
 t_env		*init_env()

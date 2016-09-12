@@ -2,9 +2,8 @@
 
 void		get_piece(t_env *e, char **parse)
 {
-	e->piece.x = ft_atoi(parse[2]);
 	e->piece.y = ft_atoi(parse[1]);
-	free_tab(parse);
+	e->piece.x = ft_atoi(parse[2]);
 }
 
 void		get_piece_map(t_env *e, char *line)

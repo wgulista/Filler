@@ -6,24 +6,23 @@ void		get_num_player(t_env *e, char **parse)
 		e->num_player = 1;
 	else
 		e->num_player = 2;
-	free_tab(parse);
 }
 
 void		search_player_pos(char c, t_env *e)
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 
-	i = -1;
-	while (++i < e->map.y)
+	y = -1;
+	while (++y < e->map.y)
 	{
-		j = -1;
-		while (++j < e->map.x)
+		x = -1;
+		while (++x < e->map.x)
 		{
-			if (e->map.map[i][j] == c)
+			if (e->map.map[y][x] == c)
 			{
-				e->player.x = j;
-				e->player.y = i;
+				e->player.x = x;
+				e->player.y = y;
 			}
 		}
 	}

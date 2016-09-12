@@ -2,9 +2,8 @@
 
 void			get_coord_map(t_env *e, char **parse)
 {
-	e->map.x = ft_atoi(parse[2]);
 	e->map.y = ft_atoi(parse[1]);
-	free_tab(parse);
+	e->map.x = ft_atoi(parse[2]);
 }
 
 void			get_map(t_env *e, char *line)

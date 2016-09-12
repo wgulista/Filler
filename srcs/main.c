@@ -39,7 +39,7 @@ void		debug(t_env *e)
 	ft_putendl_fd("", 2);
 }
 
-void		parse(t_env *e, char **av)
+int		parse(t_env *e, char **av)
 {
 	char	*line;
 	char	**parse;
@@ -48,10 +48,6 @@ void		parse(t_env *e, char **av)
 
 	get_next_line(0, &line);
 	parse = ft_strsplit(line, ' ');
-	player = (e->num_player == 1) ? 'O' : 'X';
-	opponent = (e->num_player == 1) ? 'X' : 'O';
-	search_player_pos(player, e);
-	search_opponent_pos(opponent, e);
 	if (get_error(av, parse) == 1)
 		free_tab(parse);
 	if (e->num_player == 0)
@@ -60,6 +56,10 @@ void		parse(t_env *e, char **av)
 	parse = ft_strsplit(line, ' ');
 	get_coord_map(e, parse);
 	get_map(e, line);
+	player = (e->num_player == 1) ? 'O' : 'X';
+	opponent = (e->num_player == 1) ? 'X' : 'O';
+	search_player_pos(player, e);
+	search_opponent_pos(opponent, e);
 	get_next_line(0, &line);
 	parse = ft_strsplit(line, ' ');
 	get_piece(e, parse);
@@ -67,6 +67,7 @@ void		parse(t_env *e, char **av)
 	if (line != NULL)
 		free(line);
 	free_tab(parse);
+	return (1);
 }
 
 void		print_coord(t_env *e)
@@ -74,31 +75,25 @@ void		print_coord(t_env *e)
 	ft_putstr_fd(ft_itoa(e->solver.y), 1);
 	ft_putchar_fd(' ', 1);
 	ft_putendl_fd(ft_itoa(e->solver.x), 1);
+	free_env(e);
 }
 
 int			main(int ac, char **av)
 {
-	char	*line;
 	t_env 	*e;
 
 	(void)ac;
-	(void)av;
 	e = init_env();
-	while (get_next_line(0, &line) > 0)
-		if (ft_strlen(line) > 0)
-		{
-			e = init_env();
-			parse(e, av);
-			debug(e);
-			if (solve_filler(e))
-			{
-				free_env(e);
-				print_coord(e);
-			}
-			else
-				ft_putendl_fd("0 0", 1);
-		}
-	free_env(e);
-	ft_putendl_fd("0 0", 1);
+	if (parse(e, av))
+	{
+		solve_filler(e);
+		print_coord(e);
+	}
+	else
+	{
+		ft_putendl_fd("0 0", 1);
+		free(e);
+	}
+	free(e);
 	return (0);
 }
