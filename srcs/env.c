@@ -1,37 +1,47 @@
 #include "../includes/filler.h"
 
-void		free_env(t_env *e)
+void		free_env(t_env **e)
 {
-	e->map.x = 0;
-	e->map.y = 0;
-	free(e->map.map);
-	e->piece.x = 0;
-	e->piece.y = 0;
-	free(e->piece.map);
-	e->solver.x = 0;
-	e->solver.y = 0;
+	t_env	*tmp;
+
+	tmp = *e;
+	tmp->map.x = 0;
+	tmp->map.y = 0;
+	free(tmp->map.map);
+	tmp->piece.x = 0;
+	tmp->piece.y = 0;
+	free(tmp->piece.map);
+	tmp->solver.x = 0;
+	tmp->solver.y = 0;
+	tmp->player.x = 0;
+	tmp->player.y = 0;
+	tmp->opponent.x = 0;
+	tmp->opponent.y = 0;
+	free(tmp);
+	free((*e));
 }
 
-t_env		*init_env()
+void		init_env(t_env **e)
 {
-	t_env 	*ret;
+	t_env 	*tmp;
 
-	ret = (t_env *)malloc(sizeof(ret));
-	ret->num_player = 0;
-	ret->map.map = NULL;
-	ret->map.x = 0;
-	ret->map.y = 0;
-	ret->piece.map = NULL;
-	ret->piece.x = 0;
-	ret->piece.y = 0;
-	ret->player.map = NULL;
-	ret->player.x = 0;
-	ret->player.y = 0;
-	ret->opponent.map = NULL;
-	ret->opponent.x = 0;
-	ret->opponent.y = 0;
-	ret->solver.map = NULL;
-	ret->solver.x = 0;
-	ret->solver.y = 0;
-	return (ret);
+	tmp = (t_env *)malloc(sizeof(t_env));
+	tmp->num_player = 0;
+	tmp->map.map = NULL;
+	tmp->map.x = 0;
+	tmp->map.y = 0;
+	tmp->piece.map = NULL;
+	tmp->piece.x = 0;
+	tmp->piece.y = 0;
+	tmp->player.map = NULL;
+	tmp->player.x = 0;
+	tmp->player.y = 0;
+	tmp->opponent.map = NULL;
+	tmp->opponent.x = 0;
+	tmp->opponent.y = 0;
+	tmp->solver.map = NULL;
+	tmp->solver.x = 0;
+	tmp->solver.y = 0;
+	*e = tmp;
+	free(tmp);
 }

@@ -19,10 +19,11 @@ void		search_player_pos(char c, t_env *e)
 		x = -1;
 		while (++x < e->map.x)
 		{
-			if (e->map.map[y][x] == c)
+			if (e->map.map[y][x] == ft_toupper(c))
 			{
 				e->player.x = x;
 				e->player.y = y;
+				e->player.next = NULL;
 			}
 		}
 	}
@@ -39,10 +40,11 @@ void		search_opponent_pos(char c, t_env *e)
 		j = -1;
 		while (++j < e->map.x)
 		{
-			if (e->map.map[i][j] == c)
+			if (e->map.map[i][j] == ft_toupper(c))
 			{
 				e->opponent.x = j;
 				e->opponent.y = i;
+				e->opponent.next = NULL;
 			}
 		}
 	}
