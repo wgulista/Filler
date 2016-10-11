@@ -34,31 +34,12 @@ void		print_tab(char **tab)
 	}
 }
 
-t_point		*create_point(int x, int y)
+int			hypothenus(t_point a, t_point b)
 {
-	t_point	*new;
+	int		dist;
 
-	new = (t_point *)malloc(sizeof(t_point));
-	new->x = x;
-	new->y = y;
-	new->next = NULL;
-	return (new);
-}
-
-void		add_to_list(t_point **pos, int y, int x)
-{
-	t_point	*tmp;
-
-	if (!(*pos))
-	{
-		(*pos) = create_point(x, y);
-		return ;
-	}
-	tmp = (*pos);
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = create_point(x, y);
-
+	dist = ABS(a.x - b.x) + ABS(a.y - b.y);
+	return (dist);
 }
 
 void		debug(t_env *e)

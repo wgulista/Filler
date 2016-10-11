@@ -2,12 +2,14 @@
 # define FILLER_H
 # include "../libft/includes/libft.h"
 
+# define ABS(x) (x > 0 ? x : -x)
+
 typedef struct		s_point
 {
+	char			c;
 	char			**map;
 	int				x;
 	int				y;
-	struct s_point	*next;
 }					t_point;
 
 typedef struct 		s_env
@@ -21,6 +23,7 @@ typedef struct 		s_env
 }					t_env;
 
 void				debug(t_env *e);
+int					hypothenus(t_point a, t_point b);
 
 int					length_tab(char **tab);
 void				print_tab(char **tab);

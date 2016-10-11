@@ -3,10 +3,7 @@
 int		parse(t_env *e, char **line, char **av)
 {
 	char	**parse;
-	char	player;
-	char	opponent;
 
-	ft_put
 	get_next_line(0, line);
 	parse = ft_strsplit(*line, ' ');
 	if (get_error(av, parse) == 1)
@@ -15,10 +12,10 @@ int		parse(t_env *e, char **line, char **av)
 		get_num_player(e, parse);
 	get_coord_map(e, line);
 	get_map(e, line);
-	player = (e->num_player == 1) ? 'o' : 'x';
-	opponent = (e->num_player == 1) ? 'x' : 'o';
-	search_player_pos(player, e);
-	search_opponent_pos(opponent, e);
+	e->player.c = (e->num_player == 1) ? 'o' : 'x';
+	e->opponent.c = (e->num_player == 1) ? 'x' : 'o';
+	search_player_pos(e->player.c, e);
+	search_opponent_pos(e->opponent.c, e);
 	get_piece(e, line);
 	get_piece_map(e, line);
 	return (1);
@@ -38,14 +35,13 @@ int			main(int ac, char **av)
 
 	(void)ac;
 	init_env(&e);
-	while (get_next_line(0, &line))
-		if (ft_strlen(line) > 0)
-		{
-			parse(e, &line, av);
-			solve_filler(e);
-			print_coord(e);
-		}
-	debug(e);
-	free_env(&e);
+	if (parse(e, &line, av))
+	{
+		solve_filler(e);
+		print_coord(e);
+		free_env(&e);
+	}
+	else
+		ft_putstr_fd("0 0\n", 1);
 	return (0);
 }

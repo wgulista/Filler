@@ -23,7 +23,6 @@ void		search_player_pos(char c, t_env *e)
 			{
 				e->player.x = x;
 				e->player.y = y;
-				e->player.next = NULL;
 			}
 		}
 	}
@@ -44,7 +43,6 @@ void		search_opponent_pos(char c, t_env *e)
 			{
 				e->opponent.x = j;
 				e->opponent.y = i;
-				e->opponent.next = NULL;
 			}
 		}
 	}
