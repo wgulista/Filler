@@ -10,14 +10,6 @@ int			place_piece(t_env *e, char c, int *overlay, t_point pos)
 	return ((*overlay > 1) ? 0 : 1);
 }
 
-int			hypothenus(t_point a, t_point b)
-{
-	int		dist;
-
-	dist = ABS(a.x - b.x) + ABS(a.y - b.y);
-	return (dist);
-}
-
 int			solve_filler(t_env *e)
 {
 	int			overlay;
@@ -29,9 +21,10 @@ int			solve_filler(t_env *e)
 		pos.x = -1;
 		while (++pos.x < e->map.x)
 		{
-			if (place_piece(e, e->map.map[pos.y][pos.y], &overlay, pos))
+			if (place_piece(e, e->map.map[pos.y][pos.x], &overlay, pos))
 			{
-
+				e->solver.x = pos.x;
+				e->solver.y = pos.y;
 			}
 		}
 	}

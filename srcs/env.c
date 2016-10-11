@@ -18,7 +18,6 @@ void		free_env(t_env **e)
 	tmp->opponent.x = 0;
 	tmp->opponent.y = 0;
 	free(tmp);
-	free((*e));
 }
 
 void		init_env(t_env **e)
