@@ -1,8 +1,8 @@
 #include "../includes/filler.h"
 
-void		free_tab(char **tab)
+void			free_tab(char **tab)
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (tab[++i] != NULL)
@@ -10,19 +10,9 @@ void		free_tab(char **tab)
 	free(tab);
 }
 
-int			length_tab(char **tab)
+void			print_tab(char **tab)
 {
-	int		i;
-
-	i = 0;
-	while (tab[i] != 0)
-		i++;
-	return (i);
-}
-
-void		print_tab(char **tab)
-{
-	int 	i;
+	int 		i;
 
 	i = 0;
 	while (tab[i])
@@ -34,49 +24,33 @@ void		print_tab(char **tab)
 	}
 }
 
-int			hypothenus(t_point a, t_point b)
+int				hypothenus(t_point a, t_point b)
 {
-	int		dist;
+	int			dist;
 
 	dist = ABS(a.x - b.x) + ABS(a.y - b.y);
 	return (dist);
 }
 
-void		debug(t_env *e)
+void 			print_color_map(t_env *e)
 {
-	ft_putstr_fd("Num player = ", 2);
-	ft_putnbr_fd(e->num_player, 2);
-	ft_putendl_fd("", 2);
+	t_point	p;
 
-	ft_putstr_fd("Map X = ", 2);
-	ft_putnbr_fd(e->map.x, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Map Y = ", 2);
-	ft_putnbr_fd(e->map.y, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Piece X = ", 2);
-	ft_putnbr_fd(e->piece.x, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Piece Y = ", 2);
-	ft_putnbr_fd(e->piece.y, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Player X = ", 2);
-	ft_putnbr_fd(e->player.x, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Player Y = ", 2);
-	ft_putnbr_fd(e->player.y, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Opponent X = ", 2);
-	ft_putnbr_fd(e->opponent.x, 2);
-	ft_putendl_fd("", 2);
-
-	ft_putstr_fd("Opponent Y = ", 2);
-	ft_putnbr_fd(e->opponent.y, 2);
-	ft_putendl_fd("", 2);
+	p.y = -1;
+	ft_putstr_fd("\n\n", 2);
+	while (++p.y < e->map_coord.y)
+	{
+		p.x = -1;
+		while (++p.x < e->map_coord.x)
+		{
+			if (e->map[p.y][p.x] == 'O' || e->map[p.y][p.x] == 'o')
+				ft_putstr_fd("\x1B[32mO\x1B[0m", 2);
+			else if (e->map[p.y][p.x] == 'X' || e->map[p.y][p.x] == 'x')
+				ft_putstr_fd("\x1B[35mX\x1B[0m", 2);
+			else
+				ft_putstr_fd("\x1B[37m.\x1B[0m", 2);
+		}
+		ft_putchar_fd('\n', 2);
+	}
+	ft_putchar_fd('\n', 2);
 }

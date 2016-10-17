@@ -1,29 +1,40 @@
 #include "../includes/filler.h"
 
-void			get_coord_map(t_env *e, char **line)
+void				get_coord_map(t_env *e)
 {
+	char		*line;
 	char		**parse;
 
-	get_next_line(0, line);
-	parse = ft_strsplit(*line, ' ');
-	e->map.y = ft_atoi(parse[1]);
-	e->map.x = ft_atoi(parse[2]);
+	parse = NULL;
+	if (get_next_line(0, &line) > 0)
+	{
+		parse = ft_strsplit(line, ' ');
+		free(line);
+	}
+	e->map_coord.y = ft_atoi(parse[1]);
+	e->map_coord.x = ft_atoi(parse[2]);
 	free_tab(parse);
 }
 
-void			get_map(t_env *e, char **line)
+void			get_map(t_env *e)
 {
-	int			i;
+	t_point	pts;
+	char		*line;
 
-	i = -1;
-	get_next_line(0, line);
-	e->map.map = (char **)malloc(sizeof(char *) * (e->map.y + 1));
-	i = -1;
-	while (++i < e->map.y)
+	pts.y = -1;
+	get_next_line(0, &line);
+	free(line);
+	e->map = (char **)malloc(sizeof(char *) * (e->map_coord.y + 1));
+	while (++pts.y < e->map_coord.y)
 	{
-		get_next_line(0, line);
-		*line += 4;
-		e->map.map[i] = ft_strdup(*line);
-		e->map.map[i] = ft_strjoin(e->map.map[i], "\n");
+		e->map[pts.y] = (char *)malloc(sizeof(char) * (e->map_coord.x + 1));
+		if (get_next_line(0, &line) > 0)
+		{
+			pts.x = -1;
+			while (++pts.x < e->map_coord.x)
+				e->map[pts.y][pts.x] = line[pts.x + 4];
+			free(line);
+		}
 	}
+	print_color_map(e);
 }

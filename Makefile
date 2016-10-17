@@ -14,12 +14,12 @@
 
 NAME = wgulista.filler
 LIBFT = libft.a
-SRC_NAME = 	main.c env.c player.c map.c piece.c solver.c tools.c error.c
+SRC_NAME = 	main.c map.c piece.c tools.c rest.c play_the_filler.c
 
 OBJ_PATH = obj
 SRC_PATH = srcs
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g
 
 OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
 
