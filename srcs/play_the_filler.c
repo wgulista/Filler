@@ -10,6 +10,29 @@ static int     is_overlay(t_env *e, char c, int *overlay, t_point p)
   return (*overlay > 1 ? 0 : 1);
 }
 
+static int  is_better_cell(t_env *e, t_point m)
+{
+  int       ennemy_dist;
+  t_point   tmp;
+  t_point   p;
+
+  p.y = -1;
+  ennemy_dist = 0;
+  while (++p.y < e->piece_coord.y)
+  {
+    p.x = -1;
+    while (++p.x < e->piece_coord.x)
+    {
+      if (e->map[m.y][m.x] == e->ennemy)
+      {
+        tmp = set_point(m.x - p.y, m.y - p.y);
+        ennemy_dist += hypothenus(m, tmp);
+      }
+    }
+  }
+  return (ennemy_dist);
+}
+
 static int	is_better_place(t_env *e, t_point m)
 {
 	t_point		p;
@@ -26,8 +49,7 @@ static int	is_better_place(t_env *e, t_point m)
 			if (e->piece[p.y][p.x] == '*')
 			{
 				tmp = set_point(p.x + m.x, p.y + m.y);
-				if (!is_overlay(e, e->map[tmp.y][tmp.x], &overlay, tmp) ||
-            tmp.x >= e->map_coord.x || tmp.y >= e->map_coord.y)
+				if (!is_overlay(e, e->map[tmp.y][tmp.x], &overlay, tmp))
 					return (0);
 			}
 		}
@@ -37,9 +59,12 @@ static int	is_better_place(t_env *e, t_point m)
 
 int					play_the_filler(t_env *e)
 {
+  int       best;
+  int       cell;
 	t_point		p;
 
 	p.y = -1;
+  best = 100000000;
 	while (++p.y < e->map_coord.y)
 	{
 		p.x = -1;
@@ -47,9 +72,13 @@ int					play_the_filler(t_env *e)
 		{
 			if (is_better_place(e, p))
 			{
-        e->solver.x = p.x;
-				e->solver.y = p.y;
-        return (1);
+        if ((cell = (is_better_cell(e, p)) < best))
+        {
+          best = cell;
+          e->solver.x = p.x;
+          e->solver.y = p.y;
+          return (1);
+        }
 			}
 		}
 	}

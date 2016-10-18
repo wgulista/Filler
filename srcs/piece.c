@@ -31,7 +31,9 @@ void			get_piece_map(t_env *e)
 			pts.x = -1;
 			while (++pts.x < e->piece_coord.x)
 				e->piece[pts.y][pts.x] = line[pts.x];
+			e->piece[pts.y][pts.x] = '\0';
 			free(line);
 		}
 	}
+	e->piece[pts.y] = NULL;
 }

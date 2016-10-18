@@ -19,7 +19,7 @@ SRC_NAME = 	main.c map.c piece.c tools.c rest.c play_the_filler.c
 OBJ_PATH = obj
 SRC_PATH = srcs
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
 

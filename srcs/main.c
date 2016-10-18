@@ -16,6 +16,8 @@ static int  parse_data(t_env *e)
   get_map(e);
   get_coord_piece(e);
   get_piece_map(e);
+	play_the_filler(e);
+	print_color_map(e);
   return (1);
 }
 
@@ -44,10 +46,7 @@ int         main(void)
 		free(line);
 	}
   while (parse_data(&e))
-  {
-	  play_the_filler(&e);
 		print_coord(&e);
-  }
 	delete(&e);
 	ft_putendl_fd("0 0", 1);
   return (0);

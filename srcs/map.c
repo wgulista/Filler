@@ -33,8 +33,9 @@ void			get_map(t_env *e)
 			pts.x = -1;
 			while (++pts.x < e->map_coord.x)
 				e->map[pts.y][pts.x] = line[pts.x + 4];
+			e->map[pts.y][pts.x] = '\0';
 			free(line);
 		}
 	}
-	print_color_map(e);
+	e->map[pts.y] = NULL;
 }
