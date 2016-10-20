@@ -6,7 +6,7 @@
 /*   By: wgulista <wgulista@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 13:24:21 by wgulista          #+#    #+#             */
-/*   Updated: 2016/10/20 15:40:43 by wgulista         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:31:57 by wgulista         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct		s_gnl
 {
 	char			*save;
-	char			*buf;
+	char			*buff;
 	char			*tmp;
 	int				rd;
 }					t_gnl;
