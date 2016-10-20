@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 14:38:15 by wgulista          #+#    #+#             */
+/*   Updated: 2016/10/20 15:26:57 by wgulista         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/filler.h"
 
-int			delete_env(t_env *e)
+int				delete_env(t_env *e)
 {
 	e->map_coord = set_point(0, 0);
 	e->piece_coord = set_point(0, 0);
@@ -26,7 +38,7 @@ t_point			set_point(int x, int y)
 	return (pts);
 }
 
-void 			print_color_map(t_env *e)
+void			print_color_map(t_env *e)
 {
 	t_point		p;
 

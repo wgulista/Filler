@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 14:38:03 by wgulista          #+#    #+#             */
+/*   Updated: 2016/10/20 15:25:34 by wgulista         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/filler.h"
 
-int			get_fighter(t_env *e)
+int					get_fighter(t_env *e)
 {
-	char	*line;
-	char	**fighter;
+	char			*line;
+	char			**fighter;
 
 	if (get_next_line(0, &line) < 0)
 		return (0);
@@ -22,7 +34,7 @@ int			get_fighter(t_env *e)
 	return (1);
 }
 
-static int		print_coord(t_env *e)
+static int			print_coord(t_env *e)
 {
 	ft_putstr_fd(ft_itoa(e->solver.y), 1);
 	ft_putchar_fd(' ', 1);

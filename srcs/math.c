@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 14:38:10 by wgulista          #+#    #+#             */
+/*   Updated: 2016/10/20 15:24:40 by wgulista         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/filler.h"
 
 int			ft_abs(int num)
@@ -15,14 +27,4 @@ int			ft_sqrt(int num)
 	while (i * i < num)
 		i++;
 	return (i - 1);
-}
-
-int			hypothenus(t_point a, t_point b)
-{
-	int		x;
-	int		y;
-
-	x = (a.x - b.x) * (a.x - b.x);
-	y = (a.y - b.y) * (a.y - b.y);
-	return (ft_sqrt(x + y));
 }

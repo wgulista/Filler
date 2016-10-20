@@ -1,4 +1,16 @@
-#include "../includes/filler.h"		
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_pieces.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 14:37:56 by wgulista          #+#    #+#             */
+/*   Updated: 2016/10/20 15:16:08 by wgulista         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/filler.h"
 
 t_piece			*set_piece(int x, int y)
 {
@@ -23,4 +35,4 @@ void			add_to_list(t_piece **pieces, t_piece *new)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = new;
-}	
+}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filler.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 14:37:47 by wgulista          #+#    #+#             */
+/*   Updated: 2016/10/20 15:26:23 by wgulista         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/filler.h"
 
 int				check_piece(t_env *e, t_point m)
@@ -15,7 +27,8 @@ int				check_piece(t_env *e, t_point m)
 			if (e->piece[p.y][p.x] == '*')
 			{
 				tmp = set_point(p.x + m.x, p.y + m.y);
-				if (limit_cross_map(e, tmp.x, tmp.y) || is_ennemy(e, e->map[tmp.y][tmp.x]))
+				if (limit_cross_map(e, tmp.x, tmp.y) ||
+						is_ennemy(e, e->map[tmp.y][tmp.x]))
 					return (0);
 				else if (is_player(e, e->map[tmp.y][tmp.x]))
 					if (++overlap > 1)

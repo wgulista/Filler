@@ -6,7 +6,7 @@
 /*   By: wgulista <wgulista@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 13:24:21 by wgulista          #+#    #+#             */
-/*   Updated: 2016/01/12 09:43:23 by wgulista         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:40:43 by wgulista         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct		s_gnl
 {
 	char			*save;
-	char			*buff;
+	char			*buf;
 	char			*tmp;
 	int				rd;
 }					t_gnl;
@@ -60,7 +60,6 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strjoin(const char *s1, const char *s2);
-char				*ft_strjoin_free(const char *s1, const char *s2, int f);
 size_t				ft_strlen(const char *s);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -101,6 +100,6 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstswap(t_list *a, t_list *b);
 
-int				get_next_line(int const fd, char **line);
+int					get_next_line(int const fd, char **line);
 
 #endif

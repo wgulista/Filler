@@ -38,6 +38,14 @@ $(addprefix $(OBJ_PATH)/, %.o): $(addprefix $(SRC_PATH)/, %.c)
 	@gcc $(CFLAGS) -o $@ -c $^
 	@echo "\033[33mLinking" [ $< ] "\033[0m"
 
+norme:
+	@echo "\033[32mNorminette LIBFT\033[0m"
+	@norminette ./libft/
+	@echo "\033[32mNorminette FILLER HEADER\033[0m"
+	@norminette ./includes/filler.h
+	@echo "\033[32mNorminette FILLER SOURCES\033[0m"
+	@norminette ./srcs/
+
 clean:
 	@rm -fv $(OBJ)
 	@rm -Rf $(OBJ_PATH)

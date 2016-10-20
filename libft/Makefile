@@ -6,7 +6,7 @@
 #    By: wgulista <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/12 09:39:48 by wgulista          #+#    #+#              #
-#    Updated: 2016/01/12 10:09:37 by wgulista         ###   ########.fr        #
+#    Updated: 2016/10/20 15:40:17 by wgulista         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJET)
 		@ranlib $(NAME)
 
 $(OBJET): $(SRC)
-		@gcc $(FLAGS) -I ./includes/$(HEADER) -c $(SRC)
+		@gcc $(FLAGS) -I ./inlcudes/$(HEADER) -c $(SRC)
 
 clean:
 		@rm -f $(OBJET)

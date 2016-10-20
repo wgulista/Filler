@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 14:37:53 by wgulista          #+#    #+#             */
+/*   Updated: 2016/10/20 15:27:29 by wgulista         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/filler.h"
 
 t_point			get_pos_player(t_env *e, char c)
@@ -46,12 +58,14 @@ int				flood_fill(t_env *e, t_piece *pieces)
 		return (1);
 	p.y = -1;
 	ennemy = get_pos_player(e, e->ennemy);
-	pieces->dist = ft_sqrt(ennemy.x - pieces->pts.x) + ft_sqrt(ennemy.y - pieces->pts.y);
+	pieces->dist = ft_sqrt(ennemy.x - pieces->pts.x) +
+		ft_sqrt(ennemy.y - pieces->pts.y);
 	while (++p.y < e->piece_coord.y && (p.x = -1))
 	{
 		while (++p.x < e->piece_coord.x)
 		{
-			swap = ft_sqrt(ennemy.x - (pieces->pts.x + p.x)) + ft_sqrt(ennemy.y - (pieces->pts.y + p.y));
+			swap = ft_sqrt(ennemy.x - (pieces->pts.x + p.x)) +
+				ft_sqrt(ennemy.y - (pieces->pts.y + p.y));
 			if (e->piece[p.y][p.x] == '*' && swap < pieces->dist)
 				pieces->dist = swap;
 		}
