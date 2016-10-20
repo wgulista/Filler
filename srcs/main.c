@@ -1,53 +1,47 @@
 #include "../includes/filler.h"
-#include <stdio.h>
 
-t_point		set_point(int x, int y)
+int			get_fighter(t_env *e)
 {
-	t_point	pos;
+	char	*line;
+	char	**fighter;
 
-	pos.x = x;
-	pos.y = y;
-	return (pos);
-}
-
-static int  parse_data(t_env *e)
-{
-	get_coord_map(e);
-  get_map(e);
-  get_coord_piece(e);
-  get_piece_map(e);
-	play_the_filler(e);
-	print_color_map(e);
-  return (1);
-}
-
-static void		print_coord(t_env *e)
-{
-	if (e->solver.y == -100 && e->solver.x == -100)
-		ft_putendl_fd("0 0", 1);
+	if (get_next_line(0, &line) < 0)
+		return (0);
+	fighter = ft_strsplit(line, ' ');
+	if (ft_strcmp(fighter[2], "p1") == 0)
+	{
+		e->player = 'O';
+		e->ennemy = 'X';
+	}
 	else
 	{
-		ft_putstr_fd(ft_itoa(e->solver.y), 1);
-		ft_putchar_fd(' ', 1);
-		ft_putendl_fd(ft_itoa(e->solver.x), 1);
+		e->player = 'X';
+		e->ennemy = 'O';
 	}
+	free(line);
+	return (1);
 }
 
-int         main(void)
+static int		print_coord(t_env *e)
 {
-	char			*line;
-  t_env     e;
+	ft_putstr_fd(ft_itoa(e->solver.y), 1);
+	ft_putchar_fd(' ', 1);
+	ft_putendl_fd(ft_itoa(e->solver.x), 1);
+	return (1);
+}
 
-  e.map_coord = set_point(0, 0);
-	if (get_next_line(0, &line) > 0)
+int					main(void)
+{
+	static t_env	e;
+	int				game_loop;
+
+	game_loop = 1;
+	get_fighter(&e);
+	while (game_loop)
 	{
-		e.player = (line[10] == '1' ? 'O' : 'X');
-		e.ennemy = (line[10] == '1' ? 'X' : 'O');
-		free(line);
-	}
-  while (parse_data(&e))
+		game_loop = parse_data(&e);
 		print_coord(&e);
-	delete(&e);
-	ft_putendl_fd("0 0", 1);
-  return (0);
+		delete_env(&e);
+	}
+	return (0);
 }

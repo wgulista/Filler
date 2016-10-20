@@ -1,5 +1,12 @@
 #include "../includes/filler.h"
 
+int			delete_env(t_env *e)
+{
+	e->map_coord = set_point(0, 0);
+	e->piece_coord = set_point(0, 0);
+	return (1);
+}
+
 void			free_tab(char **tab)
 {
 	int			i;
@@ -10,34 +17,21 @@ void			free_tab(char **tab)
 	free(tab);
 }
 
-void			print_tab(char **tab)
+t_point			set_point(int x, int y)
 {
-	int 		i;
+	t_point		pts;
 
-	i = 0;
-	while (tab[i])
-	{
-		ft_putnbr_fd(i, 2);
-		ft_putchar_fd(' ', 2);
-		ft_putendl_fd(tab[i], 2);
-		++i;
-	}
-}
-
-int				hypothenus(t_point a, t_point b)
-{
-	int			dist;
-
-	dist = ABS(a.x - b.x) + ABS(a.y - b.y);
-	return (dist);
+	pts.x = x;
+	pts.y = y;
+	return (pts);
 }
 
 void 			print_color_map(t_env *e)
 {
-	t_point	p;
+	t_point		p;
 
 	p.y = -1;
-	ft_putstr_fd("\n\n", 2);
+	ft_putstr_fd("\n", 2);
 	while (++p.y < e->map_coord.y)
 	{
 		p.x = -1;

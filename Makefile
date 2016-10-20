@@ -14,7 +14,8 @@
 
 NAME = wgulista.filler
 LIBFT = libft.a
-SRC_NAME = 	main.c map.c piece.c tools.c rest.c play_the_filler.c
+SRC_NAME = 	main.c check.c math.c filler.c tools.c parse.c flood_fill.c \
+			list_pieces.c
 
 OBJ_PATH = obj
 SRC_PATH = srcs
