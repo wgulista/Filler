@@ -1,4 +1,7 @@
-seed = 6273
-../wgulista.filler won
+seed = 2724
+X: error on input
+../../LastFiller/wgulista.filler: Segfault at 0
+O: error on input
+players/superjeannot.filler won
 Score:
-160AGAINST190
+55AGAINST0

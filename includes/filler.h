@@ -6,13 +6,14 @@
 /*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 15:27:43 by wgulista          #+#    #+#             */
-/*   Updated: 2016/10/20 15:29:00 by wgulista         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:31:26 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 # include "../libft/includes/libft.h"
+# include "../minilibx/mlx.h"
 
 typedef	struct		s_point
 {
@@ -20,15 +21,28 @@ typedef	struct		s_point
 	int				y;
 }					t_point;
 
-typedef struct		s_piece
+typedef struct 		s_color
 {
-	t_point			pts;
-	int				dist;
-	struct s_piece	*next;
-}					t_piece;
+	int				r;
+	int				g;
+	int				b;
+}					t_color;
+
+typedef	struct 		s_img
+{
+	void			*img;
+	char			*data;
+	int				bpp;
+	int				sline;
+	int				endian;
+	int				depth;
+}					t_img;
 
 typedef struct		s_env
 {
+	void			*mlx;
+	void			*win;
+	t_img			img;
 	char			player;
 	char			ennemy;
 	t_point			map_coord;
@@ -36,8 +50,10 @@ typedef struct		s_env
 	t_point			piece_coord;
 	char			**piece;
 	t_point			solver;
+	t_color			*c;
 }					t_env;
 
+int					create_grid(t_env *e);
 int					limit_cross_map(t_env *e, int x, int y);
 int					limit_cross_piece(t_env *e, int x, int y);
 int					is_player(t_env *e, char c);
@@ -45,7 +61,6 @@ int					is_ennemy(t_env *e, char c);
 
 int					ft_abs(int num);
 int					ft_sqrt(int num);
-int					hypothenus(t_point a, t_point b);
 
 int					delete_env(t_env *e);
 t_point				set_point(int x, int y);
@@ -53,12 +68,6 @@ void				free_tab(char **tab);
 void				print_color_map(t_env *e);
 
 int					parse_data(t_env *e);
-
-t_piece				*set_piece(int x, int y);
-void				add_to_list(t_piece **pieces, t_piece *new);
-
-int					filler(t_env *e, t_piece *pieces);
-int					flood_fill(t_env *e, t_piece *pieces);
 
 int					play_the_filler(t_env *e);
 #endif

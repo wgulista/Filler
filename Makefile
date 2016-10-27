@@ -6,30 +6,34 @@
 #    By: wgulista <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/20 16:13:34 by wgulista          #+#    #+#              #
-#    Updated: 2016/10/20 16:14:35 by wgulista         ###   ########.fr        #
+#*   Updated: 2016/10/20 16:34:45 by                  ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wgulista.filler
 LIBFT = libft.a
-SRC_NAME = 	main.c check.c math.c filler.c tools.c parse.c flood_fill.c \
-			list_pieces.c
-
+MINILIBX = libmlx.a
+SRC_NAME = 	main.c check.c math.c filler.c tools.c parse.c solver.c display.c
 OBJ_PATH = obj
 SRC_PATH = srcs
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 OBJ = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
+LIBX = -L ./libft/ -lft -I/usr/local/include -I/usr/local/lib \
+		-L ./minilibx/ -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-	@gcc -Llibft $(OBJ) -lft -o $(NAME)
+$(NAME): $(LIBFT) $(MINILIBX) $(OBJ)
+	@gcc $(LIBX) $(OBJ) -o $(NAME)
 	@echo "\033[32mCompiling" [ $(NAME) ]"\033[0m"
 
 $(LIBFT):
 	@make -C ./libft/
+
+$(MINILIBX):
+	@make -C ./minilibx/
 
 $(addprefix $(OBJ_PATH)/, %.o): $(addprefix $(SRC_PATH)/, %.c)
 	@mkdir -p $(OBJ_PATH)
@@ -48,6 +52,7 @@ clean:
 	@rm -fv $(OBJ)
 	@rm -Rf $(OBJ_PATH)
 	@make clean -C ./libft/
+	@make clean -C ./minilibx/
 	@echo "\033[31mCleaning" [ $(NAME) ] "...\033[0m"
 
 fclean: clean

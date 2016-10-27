@@ -6,7 +6,7 @@
 /*   By: wgulista <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 14:38:13 by wgulista          #+#    #+#             */
-/*   Updated: 2016/10/20 14:38:14 by wgulista         ###   ########.fr       */
+/*   Updated: 2016/10/21 03:12:01 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 int				get_map_size(t_env *e)
 {
+	char		*keep;
 	char		*line;
-	char		**size;
 
-	if (get_next_line(0, &line) < 0)
+	if (!get_next_line(0, &line))
 		return (0);
-	size = ft_strsplit(line, ' ');
-	e->map_coord.x = ft_atoi(size[2]);
-	e->map_coord.y = ft_atoi(size[1]);
-	free(line);
-	free_tab(size);
-	return (1);
+	if (ft_strstr(line, "Plateau"))
+	{
+		keep = ft_strchr(line, ' ');
+		e->map_coord.y = ft_atoi(++keep);
+		keep = ft_strchr(line, ' ');
+		e->map_coord.x = ft_atoi(++keep);
+		free(line);
+		return (1);
+	}
+	return (0);
 }
 
 int				get_map(t_env *e)
@@ -33,7 +37,8 @@ int				get_map(t_env *e)
 	char		*line;
 
 	pts.y = -1;
-	get_next_line(0, &line);
+	if (!get_next_line(0, &line))
+		return (0);
 	free(line);
 	e->map = (char **)ft_strnew(sizeof(char *) * (e->map_coord.y + 1));
 	while (++pts.y < e->map_coord.y && (pts.x = -1))
@@ -53,17 +58,20 @@ int				get_map(t_env *e)
 
 int				get_piece_size(t_env *e)
 {
+	char		*keep;
 	char		*line;
-	char		**size;
 
-	if (get_next_line(0, &line) < 0)
+	if (!get_next_line(0, &line))
 		return (0);
-	size = ft_strsplit(line, ' ');
-	e->piece_coord.x = ft_atoi(size[2]);
-	e->piece_coord.y = ft_atoi(size[1]);
-	free(line);
-	free_tab(size);
-	return (1);
+	if (ft_strstr(line, "Piece"))
+	{
+		keep = ft_strchr(line, ' ');
+		e->piece_coord.y = ft_atoi(++keep);
+		keep = ft_strchr(line, ' ');
+		e->piece_coord.x = ft_atoi(++keep);
+		free(line);
+	}
+	return (0);
 }
 
 int				get_piece(t_env *e)
@@ -95,9 +103,6 @@ int				parse_data(t_env *e)
 	get_piece_size(e);
 	get_piece(e);
 	if (play_the_filler(e))
-	{
-		print_color_map(e);
 		return (1);
-	}
 	return (0);
 }

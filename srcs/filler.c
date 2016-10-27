@@ -12,7 +12,7 @@
 
 #include "../includes/filler.h"
 
-int				check_piece(t_env *e, t_point m)
+int				is_overlap(t_env *e, t_point m)
 {
 	int			overlap;
 	t_point		p;
@@ -44,20 +44,18 @@ int				check_piece(t_env *e, t_point m)
 int				play_the_filler(t_env *e)
 {
 	t_point		p;
-	t_piece		*pieces;
 
 	p.y = -1;
-	pieces = NULL;
 	while (++p.y < e->map_coord.y && (p.x = -1))
 	{
 		while (++p.x < e->map_coord.x)
 		{
-			if (check_piece(e, p))
-				add_to_list(&pieces, set_piece(p.x, p.y));
+			if (is_overlap(e, p))
+			{
+				e->solver = set_point(p.x, p.y);
+				return (1);
+			}
 		}
 	}
-	if (pieces)
-		return (filler(e, pieces));
-	e->solver = set_point(0, 0);
 	return (0);
 }
